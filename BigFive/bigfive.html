@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFI-10 Personality Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bigfive.css">
+</head>
+<body>
+    <div class="container">
+        <h1>BFI-10 Personality Test</h1>
+
+        <p>[1] Strongly Disagree | [2] Disagree | [3] Neutral | [4] Agree | [5] Strongly Agree</p>
+
+        <button onclick="window.location.href='../Homepage/HomePage.html'">Back to Homepage</button>
+
+        <form id="questionnaire">
+            <div class="question">
+                <p>1. I see myself as someone who is reserved.</p>
+                <label><input type="radio" name="q1" value="1"> 1</label>
+                <label><input type="radio" name="q1" value="2"> 2</label>
+                <label><input type="radio" name="q1" value="3"> 3</label>
+                <label><input type="radio" name="q1" value="4"> 4</label>
+                <label><input type="radio" name="q1" value="5"> 5</label>
+            </div>
+
+            <div class="question">
+                <p>2. I see myself as someone who is generally trusting.</p>
+                <label><input type="radio" name="q2" value="1"> 1</label>
+                <label><input type="radio" name="q2" value="2"> 2</label>
+                <label><input type="radio" name="q2" value="3"> 3</label>
+                <label><input type="radio" name="q2" value="4"> 4</label>
+                <label><input type="radio" name="q2" value="5"> 5</label>
+            </div>
+
+            <div class="question">
+                <p>3. I see myself as someone who tends to be lazy.</p>
+                <label><input type="radio" name="q3" value="1"> 1</label>
+                <label><input type="radio" name="q3" value="2"> 2</label>
+                <label><input type="radio" name="q3" value="3"> 3</label>
+                <label><input type="radio" name="q3" value="4"> 4</label>
+                <label><input type="radio" name="q3" value="5"> 5</label>
+            </div>
+
+            <div class="question">
+                <p>4. I see myself as someone who is relaxed, handles stress well.</p>
+                <label><input type="radio" name="q4" value="1"> 1</label>
+                <label><input type="radio" name="q4" value="2"> 2</label>
+                <label><input type="radio" name="q4" value="3"> 3</label>
+                <label><input type="radio" name="q4" value="4"> 4</label>
+                <label><input type="radio" name="q4" value="5"> 5</label>
+            </div>
+
+            <div class="question">
+                <p>5. I see myself as someone who has an active imagination.</p>
+                <label><input type="radio" name="q5" value="1"> 1</label>
+                <label><input type="radio" name="q5" value="2"> 2</label>
+                <label><input type="radio" name="q5" value="3"> 3</label>
+                <label><input type="radio" name="q5" value="4"> 4</label>
+                <label><input type="radio" name="q5" value="5"> 5</label>
+            </div>
+
+            <button type="button" onclick="calculateScore()">Submit</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            let scores = {
+                Extraversion: 0,
+                Agreeableness: 0,
+                Conscientiousness: 0,
+                Neuroticism: 0,
+                Openness: 0
+            };
+
+            const responses = {
+                q1: 'Extraversion', 
+                q2: 'Agreeableness', 
+                q3: 'Conscientiousness', 
+                q4: 'Neuroticism', 
+                q5: 'Openness'
+            };
+
+            Object.keys(responses).forEach(question => {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected) {
+                    scores[responses[question]] += parseInt(selected.value);
+                }
+            });
+
+            let resultText = `
+                Extraversion: ${scores.Extraversion} / 5
+                Agreeableness: ${scores.Agreeableness} / 5
+                Conscientiousness: ${scores.Conscientiousness} / 5
+                Neuroticism: ${scores.Neuroticism} / 5
+                Openness: ${scores.Openness} / 5
+            `;
+
+            document.getElementById("result").textContent = resultText;
+        }
+    </script>
+</body>
+</html>

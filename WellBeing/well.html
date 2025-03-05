@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHO-5 Well-Being Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="well.css">
+</head>
+<body>
+    <div class="container">
+        <h1>WHO-5 Well-Being Index</h1>
+        <p>[1] At no time | [2] Some of the time | [3] Less than half the time | [4] More than half the time | [5] Most of the time | [6] All the time</p>
+        <button onclick="window.location.href='../Homepage/HomePage.html'">Back to Homepage</button>
+        
+        <form id="questionnaire">
+            <div class="question">
+                <p>1. I have felt cheerful and in good spirits.</p>
+                <label><input type="radio" name="q1" value="0"> 1</label>
+                <label><input type="radio" name="q1" value="1"> 2</label>
+                <label><input type="radio" name="q1" value="2"> 3</label>
+                <label><input type="radio" name="q1" value="3"> 4</label>
+                <label><input type="radio" name="q1" value="4"> 5</label>
+                <label><input type="radio" name="q1" value="5"> 6</label>
+            </div>
+
+            <div class="question">
+                <p>2. I have felt calm and relaxed.</p>
+                <label><input type="radio" name="q2" value="0"> 1</label>
+                <label><input type="radio" name="q2" value="1"> 2</label>
+                <label><input type="radio" name="q2" value="2"> 3</label>
+                <label><input type="radio" name="q2" value="3"> 4</label>
+                <label><input type="radio" name="q2" value="4"> 5</label>
+                <label><input type="radio" name="q2" value="5"> 6</label>
+            </div>
+
+            <div class="question">
+                <p>3. I have felt active and vigorous.</p>
+                <label><input type="radio" name="q3" value="0"> 1</label>
+                <label><input type="radio" name="q3" value="1"> 2</label>
+                <label><input type="radio" name="q3" value="2"> 3</label>
+                <label><input type="radio" name="q3" value="3"> 4</label>
+                <label><input type="radio" name="q3" value="4"> 5</label>
+                <label><input type="radio" name="q3" value="5"> 6</label>
+            </div>
+
+            <div class="question">
+                <p>4. I woke up feeling fresh and rested.</p>
+                <label><input type="radio" name="q4" value="0"> 1</label>
+                <label><input type="radio" name="q4" value="1"> 2</label>
+                <label><input type="radio" name="q4" value="2"> 3</label>
+                <label><input type="radio" name="q4" value="3"> 4</label>
+                <label><input type="radio" name="q4" value="4"> 5</label>
+                <label><input type="radio" name="q4" value="5"> 6</label>
+            </div>
+
+            <div class="question">
+                <p>5. My daily life has been filled with things that interest me.</p>
+                <label><input type="radio" name="q5" value="0"> 1</label>
+                <label><input type="radio" name="q5" value="1"> 2</label>
+                <label><input type="radio" name="q5" value="2"> 3</label>
+                <label><input type="radio" name="q5" value="3"> 4</label>
+                <label><input type="radio" name="q5" value="4"> 5</label>
+                <label><input type="radio" name="q5" value="5"> 6</label>
+            </div>
+
+            <button type="button" onclick="calculateScore()">Submit</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question input:checked');
+            questions.forEach(input => {
+                score += parseInt(input.value);
+            });
+
+            let percentage = (score / 25) * 100;
+            let resultText = `Your well-being score is ${percentage.toFixed(1)}%. `;
+
+            if (percentage < 50) {
+                resultText += "Your well-being may be low. Consider seeking professional support.";
+            } else if (percentage < 75) {
+                resultText += "Your well-being is moderate. Focus on self-care and positive activities.";
+            } else {
+                resultText += "You have a high well-being score. Keep up the good habits!";
+            }
+
+            document.getElementById("result").textContent = resultText;
+        }
+    </script>
+</body>
+</html>
